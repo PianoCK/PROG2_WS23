@@ -1,4 +1,4 @@
-# Decorator Hallo Leute!!
+# Decorator
 
 def f1(func):
     def wrapper(*args, **kwargs):
@@ -8,7 +8,7 @@ def f1(func):
     return wrapper
 
 
-@f1
+@f1  # Ist gleichbedeutend mit f = f1(f)
 def f(name):
     print("Hallo", name)
 
