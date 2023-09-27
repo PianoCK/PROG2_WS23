@@ -60,8 +60,8 @@ for nr in range(1, 9):
 sprites = []
 
 for _ in range(12):
-    ball = Ball(random.randint(60, WIDTH - 60),
-                random.randint(60, HEIGHT - 60),
+    ball = Ball(random.randint(64, WIDTH - 64),
+                random.randint(64, HEIGHT - 64),
                 random.choice([-3, -2, -1, 1, 2, 3]),
                 random.choice([-3, -2, -1, 1, 2, 3]),
                 image_dict)
