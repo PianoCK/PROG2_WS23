@@ -9,7 +9,7 @@ class Sprite(ABC):
         pass
 
 
-class Ball(Sprite):
+class Coin(Sprite):
     def __init__(self, x, y, vx, vy, image_dict):
         self.x = x
         self.y = y

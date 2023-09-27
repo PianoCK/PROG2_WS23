@@ -46,6 +46,17 @@ for nr in range(1, 9):
     image_dict["coin"+str(nr)] = pygame.image.load(os.path.join(
         game_folder, '_images/coin'+str(nr)+'.png')).convert_alpha()
 
+sprites = []
+
+# Coin Factory
+for _ in range(12):
+    sprites.append(Coin(random.randint(64, WIDTH - 64),
+                        random.randint(64, HEIGHT - 64),
+                        random.choice([-3, -2, -1, 1, 2, 3]),
+                        random.choice([-3, -2, -1, 1, 2, 3]),
+                        image_dict))
+
+running = True
 
 #########################################################################
 # Game Loop:  Hier ist das Herzstück des Templates
@@ -57,21 +68,7 @@ for nr in range(1, 9):
 # 5. Double Buffering: Der Screen wird geswitcht und angezeigt
 #########################################################################
 
-sprites = []
-
-for _ in range(12):
-    ball = Ball(random.randint(64, WIDTH - 64),
-                random.randint(64, HEIGHT - 64),
-                random.choice([-3, -2, -1, 1, 2, 3]),
-                random.choice([-3, -2, -1, 1, 2, 3]),
-                image_dict)
-    sprites.append(ball)
-
-
-running = True
-
 while running:
-
     #########################################################################
     # 1. Wait-Phase:
     # Die pygame-interne Funktion clock.tick(FPS) berechnet die
@@ -92,7 +89,7 @@ while running:
             running = False             # dann raus aus dem Game Loop
 
     #########################################################################
-    # 3. Update-Phase: Hier ist die komplette Game Logik untergebracht.abs
+    # 3. Update-Phase: Hier ist die komplette Game Logik untergebracht.
 
     for sprite in sprites:
         sprite.update()
