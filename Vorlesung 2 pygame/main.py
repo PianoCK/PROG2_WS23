@@ -5,16 +5,8 @@
 import pygame   # die Spiele-Engine
 import random   # Zufallszahlen brauchen wir immer...
 import os       # Das Dateisystem
-
-#########################################################################
-# Settings:   Hier stehen alle Konstanten Variablen für das Spiel.
-#             Diese könnten auch ausgelagert werden in settings.py
-#             und per import eingebunden werden
-#########################################################################
-
-WIDTH = 320       # Breite des Bildschirms in Pixeln
-HEIGHT = 240       # Höhe des Bildschirms in Pixeln
-FPS = 60        # Frames per Second (30 oder 60 FPS sind üblicher Standard)
+from settings import *
+from sprites import *
 
 #########################################################################
 # Initialisierung:    pygame wird gestartet
@@ -48,13 +40,12 @@ game_folder = os.path.dirname(__file__)
 
 # Wir binden eine Grafik (Ball) ein
 # convert_alpha lässt eine PNG-Datei transparent erscheinen
+image_dict = {}
 
-ball = pygame.image.load(os.path.join(
-    game_folder, '_images/ball.png')).convert_alpha()
+for nr in range(1, 9):
+    image_dict["coin"+str(nr)] = pygame.image.load(os.path.join(
+        game_folder, '_images/coin'+str(nr)+'.png')).convert_alpha()
 
-# Im ballRect-Objekt finden wir die Abmessungen der Grafik
-# Das Rect-Object ist sehr hilfreich
-ballRect = ball.get_rect()
 
 #########################################################################
 # Game Loop:  Hier ist das Herzstück des Templates
@@ -65,6 +56,17 @@ ballRect = ball.get_rect()
 # 4. Render: Alle Sprites werden auf den Bildschirm gezeichnet
 # 5. Double Buffering: Der Screen wird geswitcht und angezeigt
 #########################################################################
+
+sprites = []
+
+for _ in range(12):
+    ball = Ball(random.randint(60, WIDTH - 60),
+                random.randint(60, HEIGHT - 60),
+                random.choice([-3, -2, -1, 1, 2, 3]),
+                random.choice([-3, -2, -1, 1, 2, 3]),
+                image_dict)
+    sprites.append(ball)
+
 
 running = True
 
@@ -92,7 +94,8 @@ while running:
     #########################################################################
     # 3. Update-Phase: Hier ist die komplette Game Logik untergebracht.abs
 
-    # To Do
+    for sprite in sprites:
+        sprite.update()
 
     #########################################################################
     # 4. Render-Phase: Zeichne alles auf den Bildschirm
@@ -101,7 +104,8 @@ while running:
     screen.fill((255, 255, 255))    # RGB Weiß
 
     # Zeichne Objekt an Position (80,40) auf den Screen
-    screen.blit(ball, (80, 40))
+    for sprite in sprites:
+        screen.blit(sprite.image, sprite.imageRect)
 
     #########################################################################
     # 5. Double Buffering
