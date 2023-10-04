@@ -46,15 +46,22 @@ for nr in range(1, 9):
     image_dict["coin"+str(nr)] = pygame.image.load(os.path.join(
         game_folder, '_images/coin'+str(nr)+'.png')).convert_alpha()
 
+image_dict["ball"] = pygame.image.load(os.path.join(
+    game_folder, '_images/ball.png')).convert_alpha()
 sprites = []
 
-# Coin Factory
-for _ in range(12):
+# Sprite Factory
+for _ in range(10):
+    sprites.append(Ball(random.randint(64, WIDTH - 64),
+                        random.randint(64, HEIGHT - 64),
+                        random.choice([-3, -2, -1, 1, 2, 3]),
+                        random.choice([-3, -2, -1, 1, 2, 3]), image_dict))
+
+for _ in range(10):
     sprites.append(Coin(random.randint(64, WIDTH - 64),
                         random.randint(64, HEIGHT - 64),
                         random.choice([-3, -2, -1, 1, 2, 3]),
-                        random.choice([-3, -2, -1, 1, 2, 3]),
-                        image_dict))
+                        random.choice([-3, -2, -1, 1, 2, 3]), image_dict))
 
 running = True
 

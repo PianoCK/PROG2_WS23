@@ -1,3 +1,6 @@
+
+import pygame
+import os
 from settings import *
 import random
 from abc import ABC, abstractmethod
@@ -7,6 +10,33 @@ class Sprite(ABC):
     @abstractmethod
     def update():
         pass
+
+
+class Ball(Sprite):
+    def __init__(self, x, y, vx, vy, image_dict):
+        self.x = x
+        self.y = y
+        self.vx = vx
+        self.vy = vy
+        game_folder = os.path.dirname(__file__)
+        self.image = image_dict["ball"]
+        self.imageRect = self.image.get_rect()
+        print(id(self.image))
+
+    def update(self):
+
+        # Kollision am Rand
+        if self.imageRect.right >= WIDTH or self.imageRect.left <= 0:
+            self.vx = self.vx * -1
+        if self.imageRect.bottom >= HEIGHT or self.imageRect.top <= 0:
+            self.vy = self.vy * -1
+
+        # Bewegungsgleichung
+        self.x = self.x + self.vx
+        self.y = self.y + self.vy
+
+        # Aktualsierung
+        self.imageRect.topleft = (self.x, self.y)
 
 
 class Coin(Sprite):
