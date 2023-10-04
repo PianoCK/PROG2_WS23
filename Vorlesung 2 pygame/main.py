@@ -75,14 +75,14 @@ while running:
     # tatsächliche Zeit zwischen zwei Frames und limitiert diese
     # auf einen Wert(z. B. 1/60). Diese tatsächliche verbrauchte
     # Zeit wird dann bei der Aktualisierung des Spiels benötigt,
-    # um dieGeschwindigkeit der Objekte anzupassen. '''
+    # um dieGeschwindigkeit der Objekte anzupassen.
 
     dt = clock.tick(FPS) / 1000
 
     #########################################################################
     # 2. Input-Phase:
     # Mit pygame.event.get() leeren wir den Event-Speicher.
-    # Das ist wichtig, sonst läuft dieser voll und das Spiel stürzt ab. '''
+    # Das ist wichtig, sonst läuft dieser voll und das Spiel stürzt ab.
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   # Windows Close Button?
@@ -100,7 +100,7 @@ while running:
     # Hintergrund
     screen.fill((255, 255, 255))    # RGB Weiß
 
-    # Zeichne Objekt an Position (80,40) auf den Screen
+    # Zeichne Objekte an Position auf den Screen
     for sprite in sprites:
         screen.blit(sprite.image, sprite.imageRect)
 
