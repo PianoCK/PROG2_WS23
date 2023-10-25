@@ -17,7 +17,7 @@ class Observable(ABC):
 
     def unregister(self, follower):
         if follower in self.observers:
-            del self.observers[follower]
+            self.observers.remove(follower)
 
     def notify(self):
         for follower in self.observers:
@@ -58,6 +58,7 @@ sebi.post("Hurra - ich bin bei Insta!")
 sebi.post("Sitze gerade in einer langweiligen Vorlesung.")
 
 lisa.post("Mal ausprobieren, was die App so kann...")
+lisa.unregister(martin)
 lisa.post("Ich sollte vorne die Vorlesung machen. Oh mann oh mann.")
 
 
