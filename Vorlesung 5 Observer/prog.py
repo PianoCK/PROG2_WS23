@@ -7,7 +7,7 @@ class Observer(ABC):
         pass
 
 class Observable(ABC):
-    @abstractmethod
+
     def __init__(self):
         self.observers = []
 
