@@ -6,8 +6,7 @@ class Observer(ABC):
     def notification():
         pass
 
-class Observable(ABC):
-
+class Observable:
     def __init__(self):
         self.observers = []
 
